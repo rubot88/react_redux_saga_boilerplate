@@ -2,7 +2,7 @@ const asyncTypes = [
     'REQUEST',
     'SUCCESS',
     'FAILED',
-    'CLEAR_NOTIFICATION'
+    'CLEAR'
   ]
   
   const actionTypes = [
