@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import './App.css'
+import { Route, Switch } from 'react-router-dom'
+import { publicRoutes } from './routes/index'
+import requireAuth from './utils/requireAuth'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <React.StrictMode>
+      <Switch>
+        {publicRoutes.map(({path, component, exact}) => 
+          <Route
+            exact={exact}
+            key={path}
+            path={path}
+            component={component}
+          />
+        )}
+        {/* 
+          Render private routes
+         */}
+        <Route path='/' component={requireAuth(() => <div>Private component</div>)}/>
+      </Switch>
+    </React.StrictMode>
+  )
 }
 
-export default App;
+export default App
+
+
